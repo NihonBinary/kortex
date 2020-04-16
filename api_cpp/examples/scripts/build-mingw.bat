@@ -14,4 +14,4 @@ ICACLS %build_folder% /grant Everyone:F /t
 cd %build_folder%
 del * /s /f /q
 
-cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=%build_type% -DKORTEX_SUB_DIR=%kortex_api_folder% && mingw32-make
+cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=%build_type% -DKORTEX_SUB_DIR=%kortex_api_folder% %3 %4 %5 %6 %7 %8 %9 && mingw32-make
