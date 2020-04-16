@@ -190,7 +190,7 @@ else() # Not using Conan
     endif()
     link_libraries(${KORTEX_DIR}lib/${KORTEX_LIB_SUBDIR}/libKortexApi.a)
   elseif(WIN32)
-    execute_process(COMMAND ./download_kortex_api.bat
+    execute_process(COMMAND download_kortex_api.bat
       WORKING_DIRECTORY ../scripts
       RESULT_VARIABLE DOWNLOAD_API_RESULT
       OUTPUT_VARIABLE DOWNLOAD_API_OUTPUT)
@@ -198,7 +198,11 @@ else() # Not using Conan
       message("Kortex API was not downloaded prior to running CMake.")
       message(FATAL_ERROR ${DOWNLOAD_API_OUTPUT})
     endif()
-    link_libraries(${KORTEX_DIR}lib/${KORTEX_LIB_SUBDIR}/KortexApi.lib)
+    if(MSVC)
+      link_libraries(${KORTEX_DIR}lib/${KORTEX_LIB_SUBDIR}/KortexApi.lib)
+    else()
+      link_libraries(${KORTEX_DIR}lib/${KORTEX_LIB_SUBDIR}/libKortexApi.a)
+    endif()
   endif()
 
   # Add Include Directories
